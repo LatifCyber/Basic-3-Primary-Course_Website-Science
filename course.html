@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topics – Integrated Science Basic 3</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Topic Nav Pills ── */
+    .topic-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .topic-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 99px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.92rem;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .topic-nav a:hover { transform: translateY(-3px); box-shadow: 0 7px 18px rgba(0,0,0,0.17); }
+    .tn-green  { background: #27AE60; }
+    .tn-teal   { background: #16A085; }
+    .tn-orange { background: #E67E22; }
+    .tn-red    { background: #C0392B; }
+    .tn-earth  { background: #1A7A4C; }
+    .tn-yellow { background: #D4AC0D; color:#1a1a1a !important; }
+    .tn-purple { background: #8E44AD; }
+    .tn-blue   { background: #2980B9; }
+
+    /* ── Topic Section Styling ── */
+    .topic-section {
+      background: white;
+      border-radius: 24px;
+      padding: 36px 32px;
+      margin-bottom: 36px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      scroll-margin-top: 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .topic-section::before {
+      content: attr(data-emoji);
+      position: absolute;
+      right: 28px;
+      top: 20px;
+      font-size: 5rem;
+      opacity: 0.07;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .topic-section h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.75rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .topic-section h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.15rem;
+      margin: 20px 0 6px;
+      color: #2c3e50;
+    }
+    .topic-section p {
+      color: #4a6a4a;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+
+    /* Syllabus strand badge */
+    .strand-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    /* Keyword highlight */
+    .kw {
+      background: #eafaf1;
+      color: #1a7a4c;
+      padding: 1px 7px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Key terms box */
+    .key-terms {
+      background: #f8fffe;
+      border: 2px dashed #b2dfdb;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .key-terms p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #2c6e5a;
+    }
+    .key-terms strong { color: #1a5c48; }
+
+    /* Concept grid */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .concept-card {
+      background: linear-gradient(135deg, #f0fdf4, #e8f8f5);
+      border-radius: 14px;
+      padding: 16px 14px;
+      text-align: center;
+      border: 1.5px solid #d5f5e3;
+    }
+    .concept-card .cc-emoji { font-size: 2rem; display: block; margin-bottom: 6px; }
+    .concept-card .cc-title { font-family: 'Fredoka One', cursive; font-size: 0.95rem; color: #1a5c48; }
+    .concept-card .cc-desc  { font-size: 0.8rem; color: #5a8a6a; margin-top: 4px; }
+
+    /* Flex topic layout */
+    .topic-flex {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .topic-text { flex: 1; min-width: 260px; }
+    .img-placeholder {
+      width: 180px;
+      min-width: 160px;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #eafaf1, #d5f5e3);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      gap: 8px;
+      color: #27ae60;
+      border: 3px dashed #a9dfbf;
+      flex-shrink: 0;
+    }
+    .img-placeholder span {
+      font-size: 0.75rem;
+      color: #5a8a6a;
+      font-weight: 700;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    /* Fun fact */
+    .fun-fact {
+      background: linear-gradient(135deg, #FFFDE7, #FFF9C4);
+      border-left: 5px solid #F1C40F;
+      border-radius: 0 14px 14px 0;
+      padding: 16px 20px;
+      margin-top: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .fact-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .fun-fact p { margin: 0; color: #6d5400; font-size: 0.95rem; line-height: 1.6; }
+
+    /* Topic divider */
+    .topic-divider {
+      text-align: center;
+      color: #b2dfdb;
+      font-size: 1.5rem;
+      letter-spacing: 8px;
+      margin: 8px 0 28px;
+    }
+
+    /* Remember box */
+    .remember-box {
+      background: linear-gradient(135deg, #EBF5FB, #D6EAF8);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      border-left: 5px solid #2E86C1;
+    }
+    .remember-box p { margin: 0; color: #1a4c78; font-size: 0.95rem; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================
+       NAVIGATION BAR
+       ======================================== -->
+  <nav class="navbar navbar-expand-lg site-navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">&#128300;</span> ScienceB3
+      </a>
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="course.html" class="nav-link active">Topics</a></li>
+          <li class="nav-item"><a href="videos.html" class="nav-link">Videos</a></li>
+          <li class="nav-item"><a href="quiz.html" class="nav-link">Quiz</a></li>
+          <li class="nav-item"><a href="extra.html" class="nav-link">Fun</a></li>
+        </ul>
+          <div class="dropdown portal-dropdown-btn mt-2 mt-lg-0">
+            <button class="portal-btn portal-btn-student dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:20px;padding:7px 18px;display:inline-flex;align-items:center;gap:6px;">
+              <i class="bi bi-person-circle"></i> Portals
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="student-login.html"><i class="bi bi-mortarboard me-2" style="color:var(--accent);"></i>Student Portal</a></li>
+              <li><a class="dropdown-item" href="teacher-login.html"><i class="bi bi-briefcase me-2" style="color:#7D3C98;"></i>Teacher Portal</a></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================
+       PAGE HERO BANNER
+       ======================================== -->
+  <section class="hero" style="padding: 56px 24px 64px;">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="hero-emoji-row" style="font-size:2rem;">🌱 🐾 ❤️ 🌍 ☀️ 🧪 🌦️ 🔬</div>
+    <h1 style="font-size: clamp(1.8rem, 4vw, 3rem);">Science Topics</h1>
+    <p class="subtitle">
+      Integrated Science — Basic 3 &nbsp;|&nbsp; Ghana Curriculum 🇬🇭<br/>
+      Read carefully and learn something new today! 📖
+    </p>
+  </section>
+
+  <!-- ========================================
+       TOPICS CONTENT
+       ======================================== -->
+  <main class="container">
+
+    <!-- ── Quick Navigation ── -->
+    <div style="
+      background: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 16px rgba(46,204,113,0.12);
+    ">
+      <p style="font-family:'Fredoka One',cursive; color:#27AE60; font-size:1.1rem; margin-bottom:14px;">
+        📌 Jump to a Topic:
+      </p>
+      <div class="topic-nav">
+        <a href="#living"      class="tn-green" >🌿 Living &amp; Non-Living</a>
+        <a href="#plants"      class="tn-teal"  >🌱 Plants &amp; Photosynthesis</a>
+        <a href="#animals"     class="tn-orange">🐾 Animals &amp; Classification</a>
+        <a href="#body"        class="tn-red"   >❤️ The Human Body</a>
+        <a href="#environment" class="tn-earth" >🌍 Environment &amp; Conservation</a>
+        <a href="#solar"       class="tn-yellow">☀️ The Solar System</a>
+        <a href="#matter"      class="tn-purple">🧪 States of Matter</a>
+        <a href="#weather"     class="tn-blue"  >🌦️ Weather &amp; Seasons</a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         TOPIC 1 — LIVING AND NON-LIVING THINGS
+         ══════════════════════════════════════════ -->
+    <section class="topic-section" id="living" data-emoji="🌿">
+      <span class="strand-badge" style="background:#27AE60;">Strand 1 · Life Science</span>
+      <h2 style="color:#1a7a4c;">🌿 Living and Non-Living Things</h2>
+
+      <div class="topic-flex">
+        <div class="topic-text">
+          <p>
+            All around us, there are many different things. Some things are
+            <span class="kw">alive</span> and others are <span class="kw">not alive</span>.
+            Scientists call them <strong>living things</strong> and <strong>non-living things</strong>.
+          </p>
+
+          <h3>🟢 What are Living Things?</h3>
+          <p>
+            Living things are things that are <strong>alive</strong>. All living things share
+            certain features — we call these <span class="kw">characteristics of living things</span>:
+          </p>
+
+          <div class="concept-grid">
+            <div class="concept-card">
+              <span class="cc-emoji">🌱</span>
+              <div class="cc-title">Growth</div>
+              <div class="cc-desc">They grow bigger over time</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🌬️</span>
+              <div class="cc-title">Breathing</div>
+              <div class="cc-desc">They take in and release gases</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🍎</span>
+              <div class="cc-title">Nutrition</div>
+              <div class="cc-desc">They need food for energy</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🏃</span>
+              <div class="cc-title">Movement</div>
+              <div class="cc-desc">They can move or respond</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🐣</span>
+              <div class="cc-title">Reproduction</div>
+              <div class="cc-desc">They can produce young ones</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">💡</span>
+              <div class="cc-title">Response</div>
+              <div class="cc-desc">They react to their surroundings</div>
+            </div>
+          </div>
+
+          <p>
+            Examples of living things: <strong>humans, animals, plants, fungi, and bacteria</strong>.
+          </p>
+
+          <h3>⚪ What are Non-Living Things?</h3>
+          <p>
+            Non-living things do <strong>not</strong> grow, breathe, eat, reproduce, or respond
+            to the world around them. Examples include:
+            <strong>rocks 🪨, water 💧, chairs 🪑, cars 🚗, pencils ✏️, and sand</strong>.
+          </p>
+
+          <div class="remember-box">
+            <p>
+              📝 <strong>Remember:</strong> Ask yourself — does it grow? Does it breathe? Can it
+              reproduce? If YES to most — it is a <strong>living thing</strong>!
+              If NO to all — it is a <strong>non-living thing</strong>.
+            </p>
+          </div>
+
+          <h3>⚡ Tricky Cases!</h3>
+          <p>
+            Fire grows and uses oxygen — but it is <strong>NOT living</strong> because it cannot
+            reproduce or respond to things around it. A car moves but is <strong>NOT living</strong>
+            because it needs a human to drive it and cannot grow or reproduce.
+          </p>
+        </div>
+
+        <div class="img-placeholder">
+          🌳🪨
+          <span>Living vs Non-Living</span>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <span class="fact-icon">💡</span>
+        <p>
+          Did you know? There are millions of tiny living things called <strong>microorganisms</strong>
+          that are so small you cannot see them without a microscope — yet they are very much alive! 🔬
+        </p>
+      </div>
+    </section>
+
+    <div class="topic-divider">· · ·</div>
+
+    <!-- ══════════════════════════════════════════
+         TOPIC 2 — PLANTS & PHOTOSYNTHESIS
+         ══════════════════════════════════════════ -->
+    <section class="topic-section" id="plants" data-emoji="🌱">
+      <span class="strand-badge" style="background:#16A085;">Strand 1 · Life Science</span>
+      <h2 style="color:#0e6655;">🌱 Plants and Photosynthesis</h2>
+
+      <div class="topic-flex">
+        <div class="topic-text">
+          <p>
+            Plants are very special living things — they are the <strong>only living things
+            that can make their own food</strong> using sunlight, water and air.
+            This makes them extremely important for all life on Earth.
+          </p>
+
+          <h3>🌿 Parts of a Plant and Their Jobs</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <span class="cc-emoji">🌿</span>
+              <div class="cc-title">Roots</div>
+              <div class="cc-desc">Absorb water &amp; minerals from soil; anchor the plant</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🪵</span>
+              <div class="cc-title">Stem</div>
+              <div class="cc-desc">Carries water up to leaves; supports the plant</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🍃</span>
+              <div class="cc-title">Leaves</div>
+              <div class="cc-desc">Make food using sunlight (photosynthesis)</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🌸</span>
+              <div class="cc-title">Flower</div>
+              <div class="cc-desc">Helps the plant reproduce by making seeds</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🍎</span>
+              <div class="cc-title">Fruit</div>
+              <div class="cc-desc">Protects seeds; provides food for animals</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🌰</span>
+              <div class="cc-title">Seeds</div>
+              <div class="cc-desc">Grow into new plants (reproduction)</div>
+            </div>
+          </div>
+
+          <h3>☀️ What is Photosynthesis?</h3>
+          <p>
+            <span class="kw">Photosynthesis</span> is the process by which plants make their own food.
+            It happens mainly in the <strong>leaves</strong>.
+          </p>
+
+          <div class="key-terms">
+            <p>
+              <strong>☀️ Sunlight</strong> + <strong>💧 Water</strong> + <strong>💨 Carbon Dioxide</strong>
+              &nbsp;→&nbsp; <strong>🍬 Sugar (food)</strong> + <strong>🌬️ Oxygen</strong>
+            </p>
+          </div>
+
+          <p>
+            The green colour in leaves comes from a substance called <span class="kw">chlorophyll</span>.
+            Chlorophyll captures sunlight and uses its energy to make food.
+            Tiny pores on the underside of leaves called <span class="kw">stomata</span> allow
+            carbon dioxide to enter and oxygen to escape.
+          </p>
+
+          <h3>💧 What Do Plants Need to Survive?</h3>
+          <p>
+            ☀️ <strong>Sunlight</strong> — for energy to make food.<br/>
+            💧 <strong>Water</strong> — absorbed through roots from the soil.<br/>
+            🌬️ <strong>Carbon dioxide</strong> — taken in through stomata.<br/>
+            🌱 <strong>Good soil</strong> — provides minerals and nutrients.<br/>
+            🌡️ <strong>Warmth</strong> — most plants grow best in warm conditions.
+          </p>
+
+          <h3>🌍 Why are Plants Important?</h3>
+          <p>
+            Plants produce the <strong>oxygen</strong> we breathe, provide <strong>food</strong>
+            for animals and humans, give <strong>shelter</strong> to animals, and help prevent
+            <strong>soil erosion</strong>. We must protect our plants and forests!
+          </p>
+        </div>
+
+        <div class="img-placeholder">
+          🌱☀️
+          <span>Photosynthesis</span>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <span class="fact-icon">🌟</span>
+        <p>
+          Did you know? One large tree produces enough oxygen for <strong>two people</strong>
+          to breathe for an entire day! Planting trees is one of the best things we can do
+          for our planet. 🌳🌳
+        </p>
+      </div>
+    </section>
+
+    <div class="topic-divider">· · ·</div>
+
+    <!-- ══════════════════════════════════════════
+         TOPIC 3 — ANIMALS & CLASSIFICATION
+         ══════════════════════════════════════════ -->
+    <section class="topic-section" id="animals" data-emoji="🐾">
+      <span class="strand-badge" style="background:#E67E22;">Strand 1 · Life Science</span>
+      <h2 style="color:#a04000;">🐾 Animals and Classification</h2>
+
+      <div class="topic-flex">
+        <div class="topic-text">
+          <p>
+            Animals are living things that can move, eat, breathe, and reproduce.
+            Scientists group animals into different classes to help us study them more easily.
+            This grouping is called <span class="kw">classification</span>.
+          </p>
+
+          <h3>🍽️ Classification by Diet</h3>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <span class="cc-emoji">🌿</span>
+              <div class="cc-title">Herbivores</div>
+              <div class="cc-desc">Eat only plants<br/><em>Cow, rabbit, elephant</em></div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🍖</span>
+              <div class="cc-title">Carnivores</div>
+              <div class="cc-desc">Eat only animals<br/><em>Lion, eagle, shark</em></div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">🍽️</span>
+              <div class="cc-title">Omnivores</div>
+              <div class="cc-desc">Eat plants &amp; animals<br/><em>Human, pig, bear</em></div>
+            </div>
+          </div>
+
+          <h3>🔬 Classification by Body Features</h3>
+          <p>
+            🦴 <strong>Vertebrates</strong> — animals with a backbone.<br/>
+            &nbsp;&nbsp;&nbsp;• <strong>Mammals</strong>: warm-blooded, have hair/fur, feed young with milk.
+              Examples: <em>humans, dogs, elephants, bats, dolphins</em>.<br/>
+            &nbsp;&nbsp;&nbsp;• <strong>Birds</strong>: have feathers and wings, most can fly, lay eggs.
+              Examples: <em>eagle, parrot, hen</em>.<br/>
+            &nbsp;&nbsp;&nbsp;• <strong>Reptiles</strong>: cold-blooded, covered in scales.
+              Examples: <em>lizard, crocodile, snake, tortoise</em>.<br/>
+            &nbsp;&nbsp;&nbsp;• <strong>Amphibians</strong>: live on land and in water, breathe through gills when young.
+              Examples: <em>frogs, toads, salamanders</em>.<br/>
+            &nbsp;&nbsp;&nbsp;• <strong>Fish</strong>: live in water, breathe through gills, covered in scales.
+              Examples: <em>tilapia, catfish, shark</em>.
+          </p>
+          <p>
+            🐛 <strong>Invertebrates</strong> — animals WITHOUT a backbone. Examples:
+            <em>insects, spiders, snails, worms</em>.
+          </p>
+
+          <h3>🐛 Insects — A Special Group</h3>
+          <p>
+            Insects are invertebrates with exactly <span class="kw">6 legs</span> and
+            <span class="kw">3 body parts</span> (head, thorax, abdomen).
+            Examples: <em>ants, bees, butterflies, grasshoppers</em>.
+            <br/>
+            ⚠️ Spiders are <strong>NOT insects</strong> — they have 8 legs and are called
+            <strong>arachnids</strong>.
+          </p>
+
+          <h3>🐸 Life Cycles</h3>
+          <p>
+            Animals go through stages of life called a <span class="kw">life cycle</span>.<br/>
+            🦋 <strong>Butterfly:</strong> Egg → Caterpillar → Pupa (cocoon) → Butterfly.<br/>
+            🐸 <strong>Frog:</strong> Egg → Tadpole → Young Frog → Adult Frog.
+          </p>
+
+          <h3>🏠 Animal Habitats</h3>
+          <p>
+            The place where an animal naturally lives is called its <span class="kw">habitat</span>.
+            Fish live in <em>water</em>, lions live on <em>grasslands (savanna)</em>,
+            monkeys live in <em>forests</em>, and camels live in <em>deserts</em>.
+          </p>
+        </div>
+
+        <div class="img-placeholder">
+          🦁🐟🦋
+          <span>Animal Groups</span>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <span class="fact-icon">🐝</span>
+        <p>
+          Did you know? Bees help plants reproduce by carrying <strong>pollen</strong> from
+          flower to flower — this is called <strong>pollination</strong>. Without bees,
+          many fruits we eat would not exist! 🌸🍎
+        </p>
+      </div>
+    </section>
+
+    <div class="topic-divider">· · ·</div>
+
+    <!-- ══════════════════════════════════════════
+         TOPIC 4 — THE HUMAN BODY
+         ══════════════════════════════════════════ -->
+    <section class="topic-section" id="body" data-emoji="❤️">
+      <span class="strand-badge" style="background:#C0392B;">Strand 1 · Life Science</span>
+      <h2 style="color:#922b21;">❤️ The Human Body</h2>
+
+      <div class="topic-flex">
+        <div class="topic-text">
+          <p>
+            Your body is made up of many <span class="kw">organs</span> — special parts that
+            each have a job to do. These organs work together in <span class="kw">systems</span>
+            to keep you alive and healthy.
+          </p>
+
+          <h3>❤️ The Circulatory System</h3>
+          <p>
+            The <strong>heart</strong> is a muscular organ about the size of your fist.
+            It pumps <strong>blood</strong> through <strong>blood vessels</strong> to every
+            part of your body. Blood carries <em>oxygen and nutrients</em> to your cells and
+            takes <em>carbon dioxide</em> away.
+            Your heart beats about <strong>100,000 times every day</strong>!
+          </p>
+
+          <h3>🫁 The Respiratory System</h3>
+          <p>
+            You breathe using your <strong>lungs</strong> — you have two of them in your chest.
+            When you breathe <em>in</em>, your lungs fill with <strong>oxygen</strong>.
+            When you breathe <em>out</em>, they release <strong>carbon dioxide</strong>.
+            The lungs and heart work together to supply oxygen to the whole body.
+          </p>
+
+          <h3>🧠 The Nervous System</h3>
+          <p>
+            The <strong>brain</strong> is the control centre of your entire body. It sends
+            messages through <strong>nerves</strong> to control your movement, senses, thoughts,
+            and feelings. The brain, spinal cord, and nerves form the <em>nervous system</em>.
+          </p>
+
+          <h3>🦴 The Skeletal System</h3>
+          <p>
+            Your <strong>skeleton</strong> is made up of <strong>206 bones</strong>.
+            It gives your body its shape, supports you when you stand, and
+            <em>protects</em> your soft organs (e.g. your skull protects your brain;
+            your ribcage protects your heart and lungs).
+            <strong>Muscles</strong> are attached to bones and help you move.
+          </p>
+
+          <h3>🍎 The Digestive System</h3>
+          <p>
+            When you eat, the digestive system breaks food down into tiny nutrients
+            your body can absorb and use for energy. The main organs are the
+            <em>mouth, stomach, and intestines</em>.
+          </p>
+
+          <h3>👀 The Five Senses</h3>
+          <div class="concept-grid">
+            <div class="concept-card"><span class="cc-emoji">👁️</span><div class="cc-title">Sight</div><div class="cc-desc">Eyes — see things</div></div>
+            <div class="concept-card"><span class="cc-emoji">👂</span><div class="cc-title">Hearing</div><div class="cc-desc">Ears — hear sounds</div></div>
+            <div class="concept-card"><span class="cc-emoji">👃</span><div class="cc-title">Smell</div><div class="cc-desc">Nose — detect smells</div></div>
+            <div class="concept-card"><span class="cc-emoji">👅</span><div class="cc-title">Taste</div><div class="cc-desc">Tongue — taste food</div></div>
+            <div class="concept-card"><span class="cc-emoji">✋</span><div class="cc-title">Touch</div><div class="cc-desc">Skin — feel things</div></div>
+          </div>
+
+          <div class="remember-box">
+            <p>
+              📝 <strong>Keep your body healthy!</strong> Eat balanced meals 🥗, drink
+              clean water 💧, exercise regularly 🏃, wash your hands 🧼, and get enough sleep 😴.
+            </p>
+          </div>
+        </div>
+
+        <div class="img-placeholder">
+          ❤️🧠🦴
+          <span>Body Organs</span>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <span class="fact-icon">💪</span>
+        <p>
+          Did you know? Babies are born with about <strong>270 bones</strong>, but as they grow
+          some bones fuse together, so adults end up with only <strong>206 bones</strong>! 🦴
+        </p>
+      </div>
+    </section>
+
+    <div class="topic-divider">· · ·</div>
+
+    <!-- ══════════════════════════════════════════
+         TOPIC 5 — ENVIRONMENT & CONSERVATION
+         ══════════════════════════════════════════ -->
+    <section class="topic-section" id="environment" data-emoji="🌍">
+      <span class="strand-badge" style="background:#1A7A4C;">Strand 3 · Earth Science</span>
+      <h2 style="color:#145a32;">🌍 Our Environment and Conservation</h2>
+
+      <div class="topic-flex">
+        <div class="topic-text">
+          <p>
+            The <span class="kw">environment</span> is everything around us — the air, water,
+            soil, plants, and animals. We all depend on a healthy environment to survive.
+            Protecting it is everyone's responsibility, including yours!
+          </p>
+
+          <h3>⚠️ What Harms Our Environment?</h3>
+          <p>
+            🔥 <strong>Burning rubbish</strong> — pollutes the air with harmful smoke.<br/>
+            🪓 <strong>Deforestation</strong> — cutting too many trees destroys habitats and
+              causes flooding and drought.<br/>
+            🏭 <strong>Industrial waste</strong> — factories releasing chemicals into rivers
+              and the air causes water and air pollution.<br/>
+            🗑️ <strong>Littering</strong> — throwing rubbish on the ground or into water bodies
+              harms animals and people.<br/>
+            🛢️ <strong>Burning fossil fuels</strong> — releasing carbon dioxide contributes to
+              <em>global warming</em> and climate change.
+          </p>
+
+          <h3>🌐 The Ozone Layer</h3>
+          <p>
+            The <span class="kw">ozone layer</span> is a protective shield high up in the
+            atmosphere that blocks the Sun's harmful <strong>ultraviolet (UV) rays</strong>
+            from reaching us. Certain chemicals from aerosol sprays and factories are damaging
+            it, which is why we must reduce pollution.
+          </p>
+
+          <h3>♻️ How Can We Help? — Conservation</h3>
+          <p>
+            <span class="kw">Conservation</span> means protecting and carefully using our
+            natural resources so they are available for future generations. Here is what YOU can do:
+          </p>
+          <div class="concept-grid">
+            <div class="concept-card"><span class="cc-emoji">♻️</span><div class="cc-title">Recycle</div><div class="cc-desc">Turn old materials into new products</div></div>
+            <div class="concept-card"><span class="cc-emoji">🌳</span><div class="cc-title">Plant Trees</div><div class="cc-desc">Restore forests and provide oxygen</div></div>
+            <div class="concept-card"><span class="cc-emoji">💧</span><div class="cc-title">Save Water</div><div class="cc-desc">Turn off taps; fix leaks</div></div>
+            <div class="concept-card"><span class="cc-emoji">🚶</span><div class="cc-title">Walk/Cycle</div><div class="cc-desc">Reduce car fumes and pollution</div></div>
+            <div class="concept-card"><span class="cc-emoji">🗑️</span><div class="cc-title">No Littering</div><div class="cc-desc">Always use a bin</div></div>
+            <div class="concept-card"><span class="cc-emoji">☀️</span><div class="cc-title">Solar Energy</div><div class="cc-desc">Use clean, renewable energy</div></div>
+          </div>
+
+          <h3>⚡ Renewable vs Non-Renewable Energy</h3>
+          <p>
+            <strong>Renewable energy</strong> will never run out: ☀️ solar, 💨 wind, 🌊 hydroelectric.<br/>
+            <strong>Non-renewable energy</strong> will one day run out: 🛢️ petroleum, ⛏️ coal, gas.
+            Ghana is investing in solar energy to power a cleaner future!
+          </p>
+        </div>
+
+        <div class="img-placeholder">
+          🌳♻️💧
+          <span>Clean Environment</span>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <span class="fact-icon">🌊</span>
+        <p>
+          Did you know? A plastic bag can take more than <strong>500 years</strong> to break down
+          in the environment! Always use reusable bags and dispose of waste responsibly. 🛍️
+        </p>
+      </div>
+    </section>
+
+    <div class="topic-divider">· · ·</div>
+
+    <!-- ══════════════════════════════════════════
+         TOPIC 6 — THE SOLAR SYSTEM
+         ══════════════════════════════════════════ -->
+    <section class="topic-section" id="solar" data-emoji="☀️">
+      <span class="strand-badge" style="background:#D4AC0D; color:#1a1a1a;">Strand 3 · Earth &amp; Space Science</span>
+      <h2 style="color:#7d6608;">☀️ The Solar System</h2>
+
+      <div class="topic-flex">
+        <div class="topic-text">
+          <p>
+            Our <span class="kw">Solar System</span> is made up of the <strong>Sun</strong>
+            and everything that orbits (moves around) it — including
+            <strong>8 planets</strong>, their moons, comets, and asteroids.
+          </p>
+
+          <h3>🌞 The Sun</h3>
+          <p>
+            The <strong>Sun</strong> is a massive ball of hot burning gas at the centre of our
+            Solar System. It is our closest <span class="kw">star</span> and gives us
+            <strong>light and heat</strong>. Without the Sun, there would be no life on Earth.
+            The Sun is so big that over <em>one million Earths</em> could fit inside it!
+          </p>
+
+          <h3>🪐 The Eight Planets (in order from the Sun)</h3>
+          <div class="concept-grid">
+            <div class="concept-card"><span class="cc-emoji">⚫</span><div class="cc-title">1. Mercury</div><div class="cc-desc">Closest to the Sun; smallest planet</div></div>
+            <div class="concept-card"><span class="cc-emoji">🟡</span><div class="cc-title">2. Venus</div><div class="cc-desc">Hottest planet; brightest in our sky</div></div>
+            <div class="concept-card"><span class="cc-emoji">🌍</span><div class="cc-title">3. Earth</div><div class="cc-desc">Our home; has water and life</div></div>
+            <div class="concept-card"><span class="cc-emoji">🔴</span><div class="cc-title">4. Mars</div><div class="cc-desc">The Red Planet; has the tallest volcano</div></div>
+            <div class="concept-card"><span class="cc-emoji">🟠</span><div class="cc-title">5. Jupiter</div><div class="cc-desc">Largest planet in the Solar System</div></div>
+            <div class="concept-card"><span class="cc-emoji">🪐</span><div class="cc-title">6. Saturn</div><div class="cc-desc">Famous for its beautiful rings</div></div>
+            <div class="concept-card"><span class="cc-emoji">🔵</span><div class="cc-title">7. Uranus</div><div class="cc-desc">Spins on its side; very cold</div></div>
+            <div class="concept-card"><span class="cc-emoji">🌑</span><div class="cc-title">8. Neptune</div><div class="cc-desc">Farthest planet; very windy</div></div>
+          </div>
+
+          <h3>🌕 The Moon</h3>
+          <p>
+            The <strong>Moon</strong> is Earth's natural <span class="kw">satellite</span>.
+            It orbits (goes around) the Earth approximately once every <strong>28 days</strong>.
+            The Moon does not produce its own light — it reflects light from the Sun.
+          </p>
+
+          <h3>🌓 Day and Night</h3>
+          <p>
+            The Earth <span class="kw">rotates</span> (spins) on its axis once every
+            <strong>24 hours</strong>. The side facing the Sun has <em>day</em> and the
+            side facing away from the Sun has <em>night</em>. This is why Ghana has
+            daytime while another country on the other side of the Earth has night!
+          </p>
+
+          <h3>🗓️ The Year</h3>
+          <p>
+            The Earth <span class="kw">orbits</span> (travels around) the Sun once in
+            <strong>365 days</strong> — this is one <em>year</em>.
+          </p>
+        </div>
+
+        <div class="img-placeholder">
+          ☀️🪐🌍
+          <span>Solar System</span>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <span class="fact-icon">🚀</span>
+        <p>
+          Did you know? Light from the Sun travels <strong>150 million kilometres</strong>
+          to reach Earth — yet it arrives in just about <strong>8 minutes</strong>!
+          Light is the fastest thing in the universe. 💫
+        </p>
+      </div>
+    </section>
+
+    <div class="topic-divider">· · ·</div>
+
+    <!-- ══════════════════════════════════════════
+         TOPIC 7 — STATES OF MATTER
+         ══════════════════════════════════════════ -->
+    <section class="topic-section" id="matter" data-emoji="🧪">
+      <span class="strand-badge" style="background:#8E44AD;">Strand 2 · Physical Science</span>
+      <h2 style="color:#6c3483;">🧪 States of Matter</h2>
+
+      <div class="topic-flex">
+        <div class="topic-text">
+          <p>
+            Everything around us is made of <span class="kw">matter</span>.
+            Matter is anything that has mass and takes up space.
+            Matter exists in three main states: <strong>solid, liquid, and gas</strong>.
+          </p>
+
+          <h3>🧊 Solids</h3>
+          <p>
+            A <strong>solid</strong> has a <em>fixed shape</em> and a <em>fixed volume</em>
+            (size). Its particles are packed closely together in a regular pattern.
+            Examples: <em>rock, wood, ice, chair, bread</em>.
+          </p>
+
+          <h3>💧 Liquids</h3>
+          <p>
+            A <strong>liquid</strong> has a <em>fixed volume</em> but <em>NO fixed shape</em> —
+            it takes the shape of its container. Its particles can flow past each other.
+            Examples: <em>water, juice, oil, blood, mercury</em>.
+          </p>
+
+          <h3>🌬️ Gases</h3>
+          <p>
+            A <strong>gas</strong> has <em>NO fixed shape</em> and <em>NO fixed volume</em>.
+            Its particles spread out to fill any container completely.
+            Examples: <em>air, oxygen, carbon dioxide, steam</em>.
+          </p>
+
+          <h3>🔄 Changes of State</h3>
+          <div class="concept-grid">
+            <div class="concept-card"><span class="cc-emoji">🧊→💧</span><div class="cc-title">Melting</div><div class="cc-desc">Solid → Liquid (when heated)</div></div>
+            <div class="concept-card"><span class="cc-emoji">💧→🌬️</span><div class="cc-title">Evaporation</div><div class="cc-desc">Liquid → Gas (when heated)</div></div>
+            <div class="concept-card"><span class="cc-emoji">💧→🧊</span><div class="cc-title">Freezing</div><div class="cc-desc">Liquid → Solid (when cooled)</div></div>
+            <div class="concept-card"><span class="cc-emoji">🌬️→💧</span><div class="cc-title">Condensation</div><div class="cc-desc">Gas → Liquid (when cooled)</div></div>
+          </div>
+
+          <div class="key-terms">
+            <p>
+              🌡️ Water freezes at <strong>0°C</strong> and boils at <strong>100°C</strong>.
+              Below 0°C, water is <em>ice</em> (solid). Between 0°C and 100°C, it is <em>liquid water</em>.
+              Above 100°C, it becomes <em>steam</em> (gas).
+            </p>
+          </div>
+
+          <h3>🌊 The Water Cycle</h3>
+          <p>
+            Water on Earth moves in a cycle that uses changes of state:
+            Water <strong>evaporates</strong> from oceans and rivers → rises and cools to
+            form clouds (<strong>condensation</strong>) → falls as rain or hail
+            (<strong>precipitation</strong>) → flows back to rivers and oceans and
+            the cycle begins again!
+          </p>
+        </div>
+
+        <div class="img-placeholder">
+          🧊💧🌬️
+          <span>Solid · Liquid · Gas</span>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <span class="fact-icon">💡</span>
+        <p>
+          Did you know? Water is the only common substance on Earth that naturally exists
+          in all <strong>three states</strong> — as ice ❄️, liquid water 💧, and water
+          vapour (steam) ♨️ — all at the same time in nature!
+        </p>
+      </div>
+    </section>
+
+    <div class="topic-divider">· · ·</div>
+
+    <!-- ══════════════════════════════════════════
+         TOPIC 8 — WEATHER & SEASONS
+         ══════════════════════════════════════════ -->
+    <section class="topic-section" id="weather" data-emoji="🌦️">
+      <span class="strand-badge" style="background:#2980B9;">Strand 3 · Earth Science</span>
+      <h2 style="color:#1a5276;">🌦️ Weather and Seasons</h2>
+
+      <div class="topic-flex">
+        <div class="topic-text">
+          <p>
+            <span class="kw">Weather</span> is the condition of the atmosphere at a particular
+            place and time. It describes how hot or cold, wet or dry, windy or calm the air is.
+            Weather can change from day to day.
+          </p>
+
+          <h3>🌡️ Weather Conditions</h3>
+          <p>
+            ☀️ <strong>Sunny</strong> — clear skies, bright sunlight, hot.<br/>
+            🌧️ <strong>Rainy</strong> — water falls from clouds as rain.<br/>
+            ☁️ <strong>Cloudy</strong> — sky covered by clouds, less sunlight.<br/>
+            🌬️ <strong>Windy</strong> — air moving quickly from one place to another.<br/>
+            ❄️ <strong>Cold / Cool</strong> — low temperature; common in the dry season.
+          </p>
+
+          <h3>🌡️ Weather Instruments</h3>
+          <div class="concept-grid">
+            <div class="concept-card"><span class="cc-emoji">🌡️</span><div class="cc-title">Thermometer</div><div class="cc-desc">Measures temperature (hot or cold)</div></div>
+            <div class="concept-card"><span class="cc-emoji">🌀</span><div class="cc-title">Anemometer</div><div class="cc-desc">Measures wind speed</div></div>
+            <div class="concept-card"><span class="cc-emoji">☂️</span><div class="cc-title">Rain Gauge</div><div class="cc-desc">Measures how much rain has fallen</div></div>
+            <div class="concept-card"><span class="cc-emoji">🧭</span><div class="cc-title">Wind Vane</div><div class="cc-desc">Shows the direction of wind</div></div>
+          </div>
+
+          <h3>📺 What is a Weather Forecast?</h3>
+          <p>
+            A <span class="kw">weather forecast</span> is a prediction of what the weather
+            will be like in the coming hours or days. Scientists called
+            <strong>meteorologists</strong> study the atmosphere to give us these forecasts.
+            In Ghana, the Ghana Meteorological Agency (GMet) provides weather forecasts.
+          </p>
+
+          <h3>🗓️ Seasons in Ghana</h3>
+          <p>
+            Ghana is near the equator, so it experiences <strong>two main seasons</strong>
+            instead of four:
+          </p>
+          <div class="concept-grid">
+            <div class="concept-card">
+              <span class="cc-emoji">🌧️</span>
+              <div class="cc-title">Rainy Season</div>
+              <div class="cc-desc">Heavy rainfall; good for farming. Southern Ghana has two rainy seasons.</div>
+            </div>
+            <div class="concept-card">
+              <span class="cc-emoji">☀️</span>
+              <div class="cc-title">Dry Season</div>
+              <div class="cc-desc">Little or no rain; sometimes cold at night. The Harmattan wind blows.</div>
+            </div>
+          </div>
+          <p style="margin-top:10px;">
+            🌍 Countries further from the equator experience <strong>four seasons</strong>:
+            Spring 🌸, Summer ☀️, Autumn 🍂, and Winter ❄️.
+          </p>
+
+          <h3>💨 What Causes Wind?</h3>
+          <p>
+            Wind is caused by air moving from areas of <strong>high pressure</strong> to
+            areas of <strong>low pressure</strong>. The Sun heats the Earth unevenly,
+            causing some air to rise and cooler air to rush in — this rushing air is wind!
+          </p>
+
+          <h3>🌧️ What Causes Rainfall?</h3>
+          <p>
+            The Sun heats water in oceans and rivers, causing <strong>evaporation</strong>.
+            Water vapour rises, cools, and forms clouds (<strong>condensation</strong>).
+            When clouds collect enough water droplets, they fall as <strong>rain</strong>.
+            This is part of the <em>water cycle</em>.
+          </p>
+        </div>
+
+        <div class="img-placeholder">
+          🌡️🌧️☀️
+          <span>Weather &amp; Seasons</span>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <span class="fact-icon">🌈</span>
+        <p>
+          Did you know? A rainbow forms when sunlight passes through tiny water droplets in the air
+          after rain. The droplets act like prisms and split the white light into
+          <strong>7 colours</strong>: Red, Orange, Yellow, Green, Blue, Indigo, Violet! 🌈
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Call to Action ── -->
+    <div class="flex-center mt-40" style="margin-top:40px;">
+      <a href="quiz.html"   class="btn btn-yellow" style="color:#3a2f00;">🧩 Test Your Knowledge</a>
+      <a href="videos.html" class="btn btn-blue">🎥 Watch Science Videos</a>
+      <a href="extra.html"  class="btn btn-green">🎉 Play Fun Games</a>
+    </div>
+
+  </main>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="site-footer">
+    <span class="footer-brand">ScienceB3</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="course.html">Topics</a>
+      <a href="videos.html">Videos</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="extra.html">Fun</a>
+    </div>
+    <p>Integrated Science for Basic 3 &nbsp;&middot;&nbsp; Ghana Curriculum</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

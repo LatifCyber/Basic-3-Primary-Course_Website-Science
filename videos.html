@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Videos – Integrated Science Basic 3</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .vid-section { margin-top: 52px; }
+    .vid-section-header { display:flex;align-items:center;gap:14px;margin-bottom:8px; }
+    .vid-section-icon { width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0; }
+    .vid-section-title { font-size:1.3rem;margin:0;color:var(--primary-dark); }
+    .vid-section-sub { color:var(--text-muted);font-size:0.9rem;margin:0 0 20px 58px;line-height:1.6;font-weight:400; }
+    .vid-divider { text-align:center;color:var(--gray-200);font-size:1rem;letter-spacing:8px;margin:16px 0 0; }
+    .video-card { background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);border:1px solid var(--gray-100);transition:var(--transition); }
+    .video-card:hover { transform:translateY(-4px);box-shadow:var(--card-shadow-hover); }
+    .video-label { display:flex;align-items:center;gap:8px;padding:12px 16px;color:white;font-weight:700;font-size:0.875rem; }
+    .video-card iframe { width:100%;aspect-ratio:16/9;border:none;display:block; }
+    .video-desc { padding:14px 16px 18px;font-size:0.875rem;color:var(--text-muted);line-height:1.65; }
+    .strand-pill { display:inline-block;padding:3px 12px;border-radius:99px;font-size:0.7rem;font-weight:600;color:white;margin-left:58px;margin-bottom:14px;font-family:var(--font-mono);letter-spacing:0.5px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg site-navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">&#128300;</span> ScienceB3
+      </a>
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="course.html" class="nav-link">Topics</a></li>
+          <li class="nav-item"><a href="videos.html" class="nav-link active">Videos</a></li>
+          <li class="nav-item"><a href="quiz.html" class="nav-link">Quiz</a></li>
+          <li class="nav-item"><a href="extra.html" class="nav-link">Fun</a></li>
+        </ul>
+          <div class="dropdown portal-dropdown-btn mt-2 mt-lg-0">
+            <button class="portal-btn portal-btn-student dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:20px;padding:7px 18px;display:inline-flex;align-items:center;gap:6px;">
+              <i class="bi bi-person-circle"></i> Portals
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="student-login.html"><i class="bi bi-mortarboard me-2" style="color:var(--accent);"></i>Student Portal</a></li>
+              <li><a class="dropdown-item" href="teacher-login.html"><i class="bi bi-briefcase me-2" style="color:#7D3C98;"></i>Teacher Portal</a></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero" style="padding:56px 0 64px;">
+    <div class="container position-relative" style="z-index:1;">
+      <span class="hero-eyebrow">Video Lessons</span>
+      <h1>Science Videos</h1>
+      <p class="lead">8 topics · 16 educational videos · Aligned to the Ghana Basic 3 curriculum. Make sure your sound is on.</p>
+    </div>
+  </section>
+
+  <main class="container py-5">
+
+    <!-- Tip Box -->
+    <div style="background:linear-gradient(135deg,#fef9e7,#fef3cd);border-radius:var(--radius);padding:18px 22px;margin-bottom:24px;display:flex;align-items:flex-start;gap:14px;border:1px solid #f8dba0;">
+      <i class="bi bi-lightbulb-fill" style="font-size:1.4rem;color:var(--gold);flex-shrink:0;margin-top:2px;"></i>
+      <p style="font-weight:500;color:#4a3500;margin:0;font-size:0.9rem;line-height:1.7;">
+        <strong>Learning tip:</strong> After watching each video, try to explain one new thing you learned to a classmate or family member. Teaching others is the most effective way to remember.
+      </p>
+    </div>
+
+    <!-- Jump Navigation -->
+    <div style="background:var(--white);border-radius:var(--radius);padding:18px 22px;margin-bottom:8px;box-shadow:var(--card-shadow);border:1px solid var(--gray-100);">
+      <p style="font-size:0.78rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;font-family:var(--font-mono);">Jump to Topic</p>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="#v-living"  class="btn-outline-primary-custom" style="padding:5px 14px;font-size:0.8rem;">Living Things</a>
+        <a href="#v-plants"  class="btn-outline-primary-custom" style="padding:5px 14px;font-size:0.8rem;">Plants</a>
+        <a href="#v-animals" class="btn-outline-primary-custom" style="padding:5px 14px;font-size:0.8rem;">Animals</a>
+        <a href="#v-body"    class="btn-outline-primary-custom" style="padding:5px 14px;font-size:0.8rem;">Human Body</a>
+        <a href="#v-env"     class="btn-outline-primary-custom" style="padding:5px 14px;font-size:0.8rem;">Environment</a>
+        <a href="#v-solar"   class="btn-outline-primary-custom" style="padding:5px 14px;font-size:0.8rem;">Solar System</a>
+        <a href="#v-matter"  class="btn-outline-primary-custom" style="padding:5px 14px;font-size:0.8rem;">States of Matter</a>
+        <a href="#v-weather" class="btn-outline-primary-custom" style="padding:5px 14px;font-size:0.8rem;">Weather</a>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Section 1: Living Things
+         Video 1: HGJVrZ2-DVo  ✅ VERIFIED – kept as-is
+         Video 2: bWBrusrCmX4  🔄 REPLACED (was RZh6g9VaAbU) – FreeSchool
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="vid-section" id="v-living">
+      <div class="vid-section-header">
+        <div class="vid-section-icon" style="background:#eafaf1;"><i class="bi bi-tree-fill" style="color:#1E8449;"></i></div>
+        <h2 class="vid-section-title">Living and Non-Living Things</h2>
+      </div>
+      <span class="strand-pill" style="background:#1E8449;">Strand 1 · Life Science</span>
+      <p class="vid-section-sub">Learn how to identify living things and understand the characteristics that define life.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#1E8449,#16a085);">Living vs Non-Living Things</div>
+          <!-- ✅ VERIFIED ID: HGJVrZ2-DVo -->
+          <iframe src="https://www.youtube.com/embed/HGJVrZ2-DVo" title="Living and Non-Living Things" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Discover what makes something a <strong>living thing</strong> and what makes it <strong>non-living</strong>. Think of examples around your own home after watching!</div>
+        </div>
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#148f77,#1E8449);">Characteristics of Living Things</div>
+          <!-- 🔄 REPLACED: RZh6g9VaAbU → bWBrusrCmX4 (FreeSchool – Living & Nonliving Things for Kids) -->
+          <iframe src="https://www.youtube.com/embed/bWBrusrCmX4" title="Characteristics of Living Things" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">All living things share <strong>7 key characteristics</strong> including movement, growth, reproduction, and nutrition. See how animals and plants both show these traits!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vid-divider">· · · · ·</div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Section 2: Plants
+         Video 1: EstPeBt9CyU  🔄 REPLACED (was sCctMW0tJ2w) – Crash Course Kids #5.2
+         Video 2: 9p3sQFXNFtk  🔄 REPLACED (was IMFo8WVLOSU) – Dr. Binocs / Peekaboo Kidz
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="vid-section" id="v-plants">
+      <div class="vid-section-header">
+        <div class="vid-section-icon" style="background:#eafaf1;"><i class="bi bi-flower1" style="color:var(--accent);"></i></div>
+        <h2 class="vid-section-title">Plants and Photosynthesis</h2>
+      </div>
+      <span class="strand-pill" style="background:var(--accent-dark);">Strand 1 · Life Science</span>
+      <p class="vid-section-sub">Discover how plants make their own food and the vital role they play in our ecosystem.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));">How Plants Make Food – Photosynthesis</div>
+          <!-- 🔄 REPLACED: sCctMW0tJ2w → EstPeBt9CyU (Crash Course Kids #5.2 – Vegetation Transformation) -->
+          <iframe src="https://www.youtube.com/embed/EstPeBt9CyU" title="Photosynthesis for Kids" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Plants are incredible food factories! Watch how leaves use <strong>sunlight, water, and carbon dioxide</strong> to produce sugar through photosynthesis.</div>
+        </div>
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#117a65,var(--accent));">Parts of a Plant and Their Functions</div>
+          <!-- 🔄 REPLACED: IMFo8WVLOSU → 9p3sQFXNFtk (Dr. Binocs Show – Parts of a Plant) -->
+          <iframe src="https://www.youtube.com/embed/v6YhghG7mzQ" title="Parts of a Plant" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Explore the <strong>roots, stem, leaves, and flowers</strong> of a plant and learn the special job that each part does to keep the plant alive and healthy.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vid-divider">· · · · ·</div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Section 3: Animals
+         Video 1: mRidGna-V4E  🔄 REPLACED (was l_oWEhFyqAI) – FreeSchool
+         Video 2: p15IrEuhYmo  🔄 REPLACED (was Xv8HsH_uDno) – Crash Course Kids
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="vid-section" id="v-animals">
+      <div class="vid-section-header">
+        <div class="vid-section-icon" style="background:#ebf5fb;"><i class="bi bi-bug-fill" style="color:var(--primary-light);"></i></div>
+        <h2 class="vid-section-title">Animals</h2>
+      </div>
+      <span class="strand-pill" style="background:var(--primary-light);">Strand 1 · Life Science</span>
+      <p class="vid-section-sub">Explore the incredible diversity of the animal kingdom — their habitats, diets, and adaptations.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,var(--primary-light),var(--primary));">Animal Classification</div>
+          <!-- 🔄 REPLACED: l_oWEhFyqAI → mRidGna-V4E (FreeSchool – Animal Classification for Children) -->
+          <iframe src="https://www.youtube.com/embed/mRidGna-V4E" title="Animal Classification for Kids" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Scientists sort animals into groups. Learn how <strong>mammals, birds, reptiles, amphibians, fish, and insects</strong> are classified by their unique features.</div>
+        </div>
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#1a5276,var(--primary-light));">Animal Habitats and Adaptations</div>
+          <!-- 🔄 REPLACED: Xv8HsH_uDno → p15IrEuhYmo (Crash Course Kids – Habitats) -->
+          <iframe src="https://www.youtube.com/embed/p15IrEuhYmo" title="Animal Habitats" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Why do polar bears have thick fur? Why do fish have fins? Discover how animals have <strong>adapted</strong> perfectly to survive in their natural habitats.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vid-divider">· · · · ·</div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Section 4: Human Body
+         Video 1: f9ONXd_-anM  🔄 REPLACED (was dZiGEoWbCYM) – Happy Learning English
+         Video 2: 3MN-M4gsDX0  🔄 REPLACED (was MxQ2RRO-pYk) – LearnBright
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="vid-section" id="v-body">
+      <div class="vid-section-header">
+        <div class="vid-section-icon" style="background:#fdecea;"><i class="bi bi-heart-pulse-fill" style="color:var(--danger);"></i></div>
+        <h2 class="vid-section-title">The Human Body</h2>
+      </div>
+      <span class="strand-pill" style="background:#c0392b;">Strand 1 · Life Science</span>
+      <p class="vid-section-sub">Explore the incredible systems that keep your body working every second of every day.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#c0392b,#e74c3c);">The Circulatory System – Your Heart and Blood</div>
+          <!-- 🔄 REPLACED: dZiGEoWbCYM → f9ONXd_-anM (Happy Learning English – Circulatory System) -->
+          <iframe src="https://www.youtube.com/embed/f9ONXd_-anM" title="The Circulatory System for Kids" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Your <strong>heart</strong> beats about 100,000 times every day! Learn how the circulatory system pumps blood carrying oxygen and nutrients around your entire body.</div>
+        </div>
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#7b241c,#c0392b);">The Human Skeleton and Muscles</div>
+          <!-- 🔄 REPLACED: MxQ2RRO-pYk → 3MN-M4gsDX0 (LearnBright – Skeletal System) -->
+          <iframe src="https://www.youtube.com/embed/3MN-M4gsDX0" title="Human Skeleton for Kids" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Your skeleton has <strong>206 bones</strong> that support and protect your body. Find out how bones and muscles work together to help you move, jump, and run!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vid-divider">· · · · ·</div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Section 5: Environment
+         Video 1: hLq2datPo5M  🔄 REPLACED (was GhqPCOkG2OE) – FreeSchool
+         Video 2: z5G4NCwWUxY  🔄 REPLACED (was TD3XSIE4ymo) – Crash Course Kids #24.1
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="vid-section" id="v-env">
+      <div class="vid-section-header">
+        <div class="vid-section-icon" style="background:#e8f8f5;"><i class="bi bi-globe-americas" style="color:var(--success);"></i></div>
+        <h2 class="vid-section-title">The Environment</h2>
+      </div>
+      <span class="strand-pill" style="background:#1E8449;">Strand 3 · Earth Science</span>
+      <p class="vid-section-sub">Understand ecosystems, food chains, and our responsibility to protect the natural world.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#1E8449,#148f77);">Food Chains and Ecosystems</div>
+          <!-- 🔄 REPLACED: GhqPCOkG2OE → hLq2datPo5M (FreeSchool – Food Chains for Kids) -->
+          <iframe src="https://www.youtube.com/embed/hLq2datPo5M" title="Food Chains for Kids" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Energy passes from the sun to plants to animals in a <strong>food chain</strong>. See how all living things in an ecosystem depend on each other to survive.</div>
+        </div>
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#117a65,#1abc9c);">Water, the Environment and the Water Cycle</div>
+          <!-- 🔄 REPLACED: TD3XSIE4ymo → z5G4NCwWUxY (Crash Course Kids #24.1 – The Great Aqua Adventure) -->
+          <iframe src="https://www.youtube.com/embed/z5G4NCwWUxY" title="Water Cycle for Kids" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc"><strong>Water is precious!</strong> Learn how the water cycle works and why it is so important to keep our rivers, lakes, and oceans clean for all living things.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vid-divider">· · · · ·</div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Section 6: Solar System
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="vid-section" id="v-solar">
+      <div class="vid-section-header">
+        <div class="vid-section-icon" style="background:#fef9e7;"><i class="bi bi-sun-fill" style="color:var(--gold);"></i></div>
+        <h2 class="vid-section-title">The Solar System</h2>
+      </div>
+      <span class="strand-pill" style="background:var(--gold);color:#1a1a1a;">Strand 3 · Earth &amp; Space Science</span>
+      <p class="vid-section-sub">Explore our solar system — the Sun, 8 planets, the Moon, and the wonders of outer space.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#ca6f1e,#d4ac0d);">Exploring Our Solar System: Planets and Space</div>
+          <!-- 🔄 REPLACED: Qd6nLM2QlWw → w36yxLgwUOc (Dr. Binocs Show – Solar System, Peekaboo Kidz) -->
+          <iframe src="https://www.youtube.com/embed/Qd6nLM2QlWw" title="Exploring Our Solar System" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Take a tour of our Solar System! Learn about all <strong>8 planets</strong> — from tiny Mercury closest to the Sun, to giant Jupiter, all the way to distant Neptune.</div>
+        </div>
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));">Earth's Rotation, Revolution and Day and Night</div>
+          <!-- ✅ VERIFIED ID: l64YwNl1wr0 (Crash Course Kids #8.1 – Earth's Rotation & Revolution) -->
+          <iframe src="https://www.youtube.com/embed/l64YwNl1wr0" title="Earth's Rotation and Revolution" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Why do we have <strong>day and night</strong>? Learn how the Earth rotates on its axis every 24 hours, and orbits the Sun every 365 days to give us our seasons.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vid-divider">· · · · ·</div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Section 7: States of Matter
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="vid-section" id="v-matter">
+      <div class="vid-section-header">
+        <div class="vid-section-icon" style="background:#f4ecf7;"><i class="bi bi-droplet-half" style="color:#7D3C98;"></i></div>
+        <h2 class="vid-section-title">States of Matter</h2>
+      </div>
+      <span class="strand-pill" style="background:#7D3C98;">Strand 2 · Physical Science</span>
+      <p class="vid-section-sub">Everything around us is made of matter. Discover solids, liquids, gases, and how they change.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,#7D3C98,var(--primary-light));">3 States of Matter: Solid, Liquid and Gas</div>
+          <!-- 🔄 REPLACED: wclY8F-UoTE → ELchwUIlWa8 (Crash Course Kids #3.1 – What's Matter?) -->
+          <iframe src="https://www.youtube.com/embed/ELchwUIlWa8" title="3 States of Matter for Kids" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Learn all about the <strong>three states of matter</strong> — solid, liquid, and gas. Discover how particles behave differently in each state and how matter changes form.</div>
+        </div>
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,var(--primary),#16a085);">The Water Cycle: Evaporation and Condensation</div>
+          <!-- ✅ VERIFIED ID: z5G4NCwWUxY (Crash Course Kids #24.1 – The Great Aqua Adventure) -->
+          <iframe src="https://www.youtube.com/embed/z5G4NCwWUxY" title="The Water Cycle" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Water changes state constantly on Earth! See how <strong>evaporation</strong> and <strong>condensation</strong> power the water cycle — and how you can make your own mini water cycle.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vid-divider">· · · · ·</div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         Section 8: Weather
+         Video 1: YbAWny7FV3w  ✅ VERIFIED – kept as-is (Crash Course Kids #28.1)
+         Video 2: RD-2dvaG4UY  ✅ VERIFIED – kept as-is (Crash Course Kids #34.2)
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="vid-section" id="v-weather">
+      <div class="vid-section-header">
+        <div class="vid-section-icon" style="background:#ebf5fb;"><i class="bi bi-cloud-rain-fill" style="color:var(--primary-light);"></i></div>
+        <h2 class="vid-section-title">Weather and Seasons</h2>
+      </div>
+      <span class="strand-pill" style="background:var(--primary-light);">Strand 3 · Earth Science</span>
+      <p class="vid-section-sub">What causes rain? How are weather and climate different? Explore weather patterns and Ghana's two seasons.</p>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,var(--primary-light),var(--accent));">Weather vs. Climate — What is the Difference?</div>
+          <!-- ✅ VERIFIED ID: YbAWny7FV3w (Crash Course Kids #28.1 – Weather vs. Climate) -->
+          <iframe src="https://www.youtube.com/embed/YbAWny7FV3w" title="Weather vs Climate" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Weather and climate are not the same thing. <strong>Weather</strong> changes daily, while <strong>climate</strong> describes long-term patterns. Learn the difference and why it matters.</div>
+        </div>
+        <div class="video-card">
+          <div class="video-label" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));">What Controls Our Weather? Wind and Air Masses</div>
+          <!-- ✅ VERIFIED ID: RD-2dvaG4UY (Crash Course Kids #34.2 – Weather Channels) -->
+          <iframe src="https://www.youtube.com/embed/RD-2dvaG4UY" title="Weather Channels" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="video-desc">Find out how <strong>moving air</strong>, wind patterns, and ocean currents create the weather we experience every day — and why weather can be so difficult to predict.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="d-flex gap-3 flex-wrap justify-content-center mt-5 mb-3">
+      <a href="quiz.html" class="btn-primary-custom"><i class="bi bi-patch-question"></i> Take a Quiz</a>
+      <a href="course.html" class="btn-outline-primary-custom"><i class="bi bi-book-half"></i> Read Topics</a>
+      <a href="extra.html" class="btn-outline-primary-custom"><i class="bi bi-stars"></i> Fun Activities</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span class="footer-brand">ScienceB3</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="course.html">Topics</a>
+      <a href="videos.html">Videos</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="extra.html">Fun</a>
+    </div>
+    <p>Integrated Science for Basic 3 &nbsp;&middot;&nbsp; Ghana Curriculum</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

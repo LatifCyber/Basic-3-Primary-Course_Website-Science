@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Integrated Science – Basic 3</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ── Hero Video Layer ── */
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0 60px;
+    }
+
+    /* Video background */
+    .hero-video-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    /* Dark gradient overlay on top of video */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(13, 38, 68, 0.92) 0%,
+        rgba(22, 66, 91, 0.85) 50%,
+        rgba(15, 50, 80, 0.90) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Animated particle dots overlay */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-particles span {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(26, 188, 156, 0.35);
+      animation: floatParticle linear infinite;
+    }
+    @keyframes floatParticle {
+      0%   { transform: translateY(110%) scale(0.6); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(-20%) scale(1.1); opacity: 0; }
+    }
+
+    /* Hero content sits above overlays */
+    .hero-content-wrap {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+    }
+
+    /* Unsplash image card on the right */
+    .hero-img-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 2px rgba(26,188,156,0.35),
+        0 30px 70px rgba(0,0,0,0.55);
+      animation: heroImgReveal 1s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 0.4s;
+    }
+    @keyframes heroImgReveal {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .hero-img-card img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+      transition: transform 8s ease;
+    }
+    .hero-img-card:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Badge overlaid on image */
+    .hero-img-badge {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(13,38,68,0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(26,188,156,0.4);
+      border-radius: 10px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .hero-img-badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #1abc9c;
+      animation: pulseDot 1.8s ease infinite;
+    }
+    @keyframes pulseDot {
+      0%,100% { box-shadow: 0 0 0 0 rgba(26,188,156,0.6); }
+      50%      { box-shadow: 0 0 0 6px rgba(26,188,156,0); }
+    }
+
+    /* Floating science emoji pills */
+    .emoji-pill {
+      position: absolute;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 40px;
+      padding: 6px 12px;
+      backdrop-filter: blur(6px);
+      animation: floatPill 5s ease-in-out infinite;
+      color: #fff;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+    .ep1 { top: 8%;  right: -12px; animation-delay: 0s;   }
+    .ep2 { top: 40%; right: 4%;    animation-delay: 1.2s; }
+    .ep3 { bottom: 18%; right: -8px; animation-delay: 0.6s; }
+    @keyframes floatPill {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* Hero text animations */
+    .hero-eyebrow       { animation: fadeUp 0.7s ease both; animation-delay: 0.1s; }
+    .page-hero h1       { animation: fadeUp 0.7s ease both; animation-delay: 0.22s; }
+    .page-hero .lead    { animation: fadeUp 0.7s ease both; animation-delay: 0.34s; }
+    .hero-cta-row       { animation: fadeUp 0.7s ease both; animation-delay: 0.46s; }
+    .hero-stats-row     { animation: fadeUp 0.7s ease both; animation-delay: 0.58s; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scanning shimmer across video */
+    .hero-scanline {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(26,188,156,0.04) 50%,
+        transparent 100%
+      );
+      background-size: 100% 200%;
+      animation: scan 6s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      0%   { background-position: 0 -100%; }
+      100% { background-position: 0 200%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg site-navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">&#128300;</span>
+        ScienceB3
+      </a>
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="course.html" class="nav-link">Topics</a></li>
+          <li class="nav-item"><a href="videos.html" class="nav-link">Videos</a></li>
+          <li class="nav-item"><a href="quiz.html" class="nav-link">Quiz</a></li>
+          <li class="nav-item"><a href="extra.html" class="nav-link">Fun</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+
+    <!-- 🎬 Looping background video — free Pexels science footage -->
+    <video class="hero-video-bg" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=1400&q=60&auto=format">
+      <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+      <source src="https://videos.pexels.com/video-files/857251/857251-hd_1920_1080_30fps.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Gradient overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Scan-line shimmer -->
+    <div class="hero-scanline"></div>
+
+    <!-- Floating particles -->
+    <div class="hero-particles" id="heroParticles"></div>
+
+    <!-- Main content -->
+    <div class="container hero-content-wrap">
+      <div class="row align-items-center g-5">
+
+        <!-- LEFT: Text block -->
+        <div class="col-lg-6">
+          <span class="hero-eyebrow">Ghana Basic School Curriculum</span>
+          <h1>Integrated Science<br/>for Basic 3 Pupils</h1>
+          <p class="lead">
+            Welcome, young scientist. Explore structured lessons, watch educational videos,
+            take topic quizzes, and discover fascinating facts about the natural world.
+          </p>
+          <div class="d-flex gap-3 flex-wrap hero-cta-row">
+            <a href="course.html" class="btn-primary-custom">
+              <i class="bi bi-book-half"></i> Start Learning
+            </a>
+            <a href="quiz.html" class="btn-secondary-custom">
+              <i class="bi bi-patch-question"></i> Take a Quiz
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT: Unsplash photo card -->
+        <div class="col-lg-6 d-none d-lg-block">
+          <div class="position-relative">
+
+            <div class="hero-img-card">
+              <!-- Unsplash: children science experiment -->
+              <img
+                src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=700&q=80&auto=format&fit=crop"
+                alt="Young students doing a science experiment"
+                loading="eager"
+              />
+              <div class="hero-img-badge">
+                <span class="dot"></span>
+                Learning in Progress
+              </div>
+            </div>
+
+            <!-- Floating pills -->
+            <div class="emoji-pill ep1">🔬 Microscope Lab</div>
+            <div class="emoji-pill ep2">🌿 Photosynthesis</div>
+            <div class="emoji-pill ep3">🌍 Environment</div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Stats row -->
+      <div class="row g-3 mt-5 hero-stats-row">
+        <div class="col-6 col-md-3">
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:16px 20px;border:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:1.6rem;font-weight:700;color:#fff;font-family:var(--font-display);">8</div>
+            <div style="font-size:0.8rem;color:rgba(255,255,255,0.65);">Science Topics</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:16px 20px;border:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:1.6rem;font-weight:700;color:#fff;font-family:var(--font-display);">80+</div>
+            <div style="font-size:0.8rem;color:rgba(255,255,255,0.65);">Quiz Questions</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:16px 20px;border:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:1.6rem;font-weight:700;color:#fff;font-family:var(--font-display);">10+</div>
+            <div style="font-size:0.8rem;color:rgba(255,255,255,0.65);">Video Lessons</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div style="background:rgba(255,255,255,0.08);border-radius:12px;padding:16px 20px;border:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:1.6rem;font-weight:700;color:#fff;font-family:var(--font-display);">B3</div>
+            <div style="font-size:0.8rem;color:rgba(255,255,255,0.65);">Ghana Curriculum</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="container py-5">
+
+    <!-- Topics -->
+    <div class="mb-5">
+      <span class="section-label">Curriculum Topics</span>
+      <h2 class="section-title">What You Will Learn</h2>
+      <p class="section-sub">Select any topic below to begin reading structured lesson notes.</p>
+
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-4">
+          <a href="course.html#living" class="topic-card">
+            <div class="card-icon" style="background:#e8f8f1;"><span>&#127807;</span></div>
+            <h3>Living &amp; Non-living Things</h3>
+            <p>Understand what makes something alive and identify characteristics of living organisms.</p>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <a href="course.html#plants" class="topic-card">
+            <div class="card-icon" style="background:#eafaf1;"><span>&#127803;</span></div>
+            <h3>Plants &amp; Photosynthesis</h3>
+            <p>Discover how plants produce food using sunlight, water, and carbon dioxide.</p>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <a href="course.html#animals" class="topic-card">
+            <div class="card-icon" style="background:#ebf5fb;"><span>&#128025;</span></div>
+            <h3>Animals</h3>
+            <p>Explore animal classification, habitats, feeding habits, and adaptations.</p>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <a href="course.html#body" class="topic-card">
+            <div class="card-icon" style="background:#fdf2f8;"><span>&#129489;</span></div>
+            <h3>The Human Body</h3>
+            <p>Study the major organs and body systems that keep you healthy and active.</p>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <a href="course.html#environment" class="topic-card">
+            <div class="card-icon" style="background:#e8f8f5;"><span>&#127757;</span></div>
+            <h3>Environment</h3>
+            <p>Learn about ecosystems, pollution, and how to care for planet Earth.</p>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <a href="course.html#matter" class="topic-card">
+            <div class="card-icon" style="background:#f4ecf7;"><span>&#129514;</span></div>
+            <h3>States of Matter</h3>
+            <p>Investigate solids, liquids, and gases, and understand changes of state.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Overview -->
+    <div class="mb-5 mt-5">
+      <span class="section-label">Platform Overview</span>
+      <h2 class="section-title">Explore the Website</h2>
+      <p class="section-sub">Four learning sections designed to make science engaging and effective.</p>
+
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3">
+          <a href="course.html" class="topic-card text-decoration-none" style="border-top:4px solid #1E8449;">
+            <div class="card-icon" style="background:#eafaf1;"><i class="bi bi-book-half" style="color:#1E8449;font-size:1.3rem;"></i></div>
+            <h3>Topics</h3>
+            <p>Structured lesson notes for all 8 science topics aligned to the Ghana curriculum.</p>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="videos.html" class="topic-card text-decoration-none" style="border-top:4px solid var(--primary);">
+            <div class="card-icon" style="background:#ebf5fb;"><i class="bi bi-play-circle-fill" style="color:var(--primary);font-size:1.3rem;"></i></div>
+            <h3>Videos</h3>
+            <p>Curated educational videos that illustrate scientific concepts visually.</p>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="quiz.html" class="topic-card text-decoration-none" style="border-top:4px solid var(--gold);">
+            <div class="card-icon" style="background:#fef9e7;"><i class="bi bi-patch-question-fill" style="color:var(--gold);font-size:1.3rem;"></i></div>
+            <h3>Quiz</h3>
+            <p>Timed, topic-based quizzes with instant feedback and score summaries.</p>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <a href="extra.html" class="topic-card text-decoration-none" style="border-top:4px solid var(--warning);">
+            <div class="card-icon" style="background:#fef5ec;"><i class="bi bi-stars" style="color:var(--warning);font-size:1.3rem;"></i></div>
+            <h3>Fun Activities</h3>
+            <p>Word scrambles, random fact generator, and interactive science games.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div style="
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      border-radius: 20px;
+      padding: 56px 40px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 12px 40px rgba(27,79,114,0.25);
+      position: relative;
+      overflow: hidden;
+    ">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(26,188,156,0.2) 0%,transparent 60%);"></div>
+      <div style="position:relative;z-index:1;">
+        <span style="font-family:var(--font-mono);font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:12px;">Start Today</span>
+        <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:14px;">Every Scientist Started with Curiosity</h2>
+        <p style="opacity:0.8;max-width:500px;margin:0 auto 32px;font-weight:400;font-size:1rem;">
+          Ask questions, explore ideas, and never stop wondering about the world around you.
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a href="course.html" class="btn-primary-custom">
+            <i class="bi bi-book-half"></i> Read Topics
+          </a>
+          <div class="dropdown">
+            <button class="btn-secondary-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i> Portals
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="student-login.html"><i class="bi bi-mortarboard me-2"></i>Student Portal</a></li>
+              <li><a class="dropdown-item" href="teacher-login.html"><i class="bi bi-briefcase me-2"></i>Teacher Portal</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span class="footer-brand">ScienceB3</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="course.html">Topics</a>
+      <a href="videos.html">Videos</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="extra.html">Fun</a>
+      
+      
+    </div>
+    <p>Integrated Science for Basic 3 &nbsp;&middot;&nbsp; Ghana Curriculum &nbsp;&middot;&nbsp; Made for young scientists everywhere</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    /* Generate floating teal particles */
+    (function () {
+      const container = document.getElementById('heroParticles');
+      if (!container) return;
+      for (let i = 0; i < 22; i++) {
+        const el = document.createElement('span');
+        const size = Math.random() * 8 + 4;
+        const left = Math.random() * 100;
+        const duration = Math.random() * 12 + 8;
+        const delay = Math.random() * 10;
+        el.style.cssText = `
+          width:${size}px;height:${size}px;
+          left:${left}%;bottom:-${size}px;
+          animation-duration:${duration}s;
+          animation-delay:-${delay}s;
+          opacity:${(Math.random() * 0.5 + 0.2).toFixed(2)};
+        `;
+        container.appendChild(el);
+      }
+    })();
+  </script>
+</body>
+</html>

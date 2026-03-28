@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz – Integrated Science Basic 3</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg site-navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">&#128300;</span> ScienceB3
+      </a>
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="course.html" class="nav-link">Topics</a></li>
+          <li class="nav-item"><a href="videos.html" class="nav-link">Videos</a></li>
+          <li class="nav-item"><a href="quiz.html" class="nav-link active">Quiz</a></li>
+          <li class="nav-item"><a href="extra.html" class="nav-link">Fun</a></li>
+        </ul>
+          <div class="dropdown portal-dropdown-btn mt-2 mt-lg-0">
+            <button class="portal-btn portal-btn-student dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:20px;padding:7px 18px;display:inline-flex;align-items:center;gap:6px;">
+              <i class="bi bi-person-circle"></i> Portals
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="student-login.html"><i class="bi bi-mortarboard me-2" style="color:var(--accent);"></i>Student Portal</a></li>
+              <li><a class="dropdown-item" href="teacher-login.html"><i class="bi bi-briefcase me-2" style="color:#7D3C98;"></i>Teacher Portal</a></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero" style="padding: 56px 0 64px;">
+    <div class="container position-relative" style="z-index:1;">
+      <span class="hero-eyebrow">Assessment</span>
+      <h1>Science Quiz</h1>
+      <p class="lead">Choose a topic and answer 10 questions. You have 30 seconds per question.</p>
+    </div>
+  </section>
+
+  <!-- QUIZ CONTENT -->
+  <main class="container py-5">
+    <div class="quiz-wrapper">
+
+      <!-- Rules Card -->
+      <div class="rules-card mb-4">
+        <div class="d-flex gap-3 align-items-start">
+          <i class="bi bi-info-circle-fill" style="font-size:1.5rem;color:var(--gold);flex-shrink:0;margin-top:2px;"></i>
+          <div>
+            <p style="font-weight:700;color:var(--primary-dark);margin-bottom:6px;">Quiz Rules</p>
+            <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.7;margin:0;">
+              Select a topic to begin. Each quiz has <strong>10 questions</strong>.
+              You have <strong>30 seconds</strong> per question — the quiz auto-submits if time runs out.
+              Your score and breakdown are shown at the end.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="quiz-progress" style="display:none;">
+        <span id="progress-text">Question 1 of 10</span>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <span id="live-score" style="white-space:nowrap;font-family:var(--font-mono);font-size:0.82rem;">Score: 0</span>
+      </div>
+
+      <!-- Topic Selection (built by JS) -->
+
+      <!-- Quiz Question Area -->
+      <div id="quiz-container" style="display:none;"></div>
+
+      <!-- Score Screen -->
+      <div class="score-screen" id="score-screen">
+        <div id="celebration-banner"></div>
+        <div id="score-topic-badge" style="margin-bottom:12px;"></div>
+        <div style="font-size:2.8rem;margin-bottom:14px;" id="score-emoji">&#127881;</div>
+        <div class="score-circle">
+          <span class="score-num" id="score-num">0/10</span>
+          <span class="score-lbl">Your Score</span>
+        </div>
+        <h2>Quiz Complete</h2>
+        <p id="score-message">Well done! Keep learning!</p>
+
+        <div style="max-width:400px;margin:8px auto 4px;">
+          <span id="accuracy-label" style="font-size:0.875rem;font-weight:600;color:var(--text-muted);display:block;margin-bottom:6px;text-align:left;">0% correct</span>
+          <div class="accuracy-bar-wrap">
+            <div class="accuracy-bar-fill" id="accuracy-fill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div id="score-stars" style="margin:14px 0;font-size:2rem;letter-spacing:4px;"></div>
+
+        <div class="breakdown">
+          <div class="breakdown-title">Question Breakdown</div>
+          <div id="score-breakdown"></div>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-center flex-wrap mt-4">
+          <button class="btn-primary-custom" onclick="restartQuiz()">
+            <i class="bi bi-arrow-repeat"></i> Try Another Topic
+          </button>
+          <a href="course.html" class="btn-outline-primary-custom">
+            <i class="bi bi-book-half"></i> Review Topics
+          </a>
+          <a href="extra.html" class="btn-outline-primary-custom">
+            <i class="bi bi-stars"></i> Fun Activities
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span class="footer-brand">ScienceB3</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="course.html">Topics</a>
+      <a href="videos.html">Videos</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="extra.html">Fun</a>
+    </div>
+    <p>Integrated Science for Basic 3 &nbsp;&middot;&nbsp; Ghana Curriculum</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

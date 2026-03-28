@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fun Activities – Integrated Science Basic 3</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #scramble-answer-box {
+      display:none;
+      background:var(--gold-light);
+      border:2px solid var(--gold);
+      border-radius:var(--radius);
+      padding:14px 20px;
+      margin-top:14px;
+      font-size:0.95rem;
+      font-weight:600;
+      color:#7d6608;
+      text-align:center;
+      animation:answer-pop .3s ease;
+    }
+    @keyframes answer-pop {
+      from { opacity:0;transform:scale(.88) translateY(-6px); }
+      to   { opacity:1;transform:scale(1) translateY(0); }
+    }
+    #scramble-answer-box .answer-word {
+      font-family:var(--font-mono);
+      font-size:1.8rem;
+      color:var(--warning);
+      letter-spacing:6px;
+      display:block;
+      margin-top:6px;
+    }
+    .riddle-card {
+      background:var(--white);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--card-shadow);
+      border:1px solid var(--gray-100);
+      text-align:center;
+    }
+    .riddle-q {
+      font-size:1.05rem;
+      font-weight:700;
+      color:var(--primary-dark);
+      margin-bottom:16px;
+      line-height:1.5;
+    }
+    .riddle-a {
+      display:none;
+      background:rgba(26,188,156,0.1);
+      border:1.5px solid var(--accent);
+      border-radius:8px;
+      padding:12px 16px;
+      font-size:0.95rem;
+      font-weight:600;
+      color:var(--accent-dark);
+      margin-top:12px;
+      animation:answer-pop .3s ease;
+    }
+    .riddle-a.show { display:block; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg site-navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">&#128300;</span> ScienceB3
+      </a>
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="course.html" class="nav-link">Topics</a></li>
+          <li class="nav-item"><a href="videos.html" class="nav-link">Videos</a></li>
+          <li class="nav-item"><a href="quiz.html" class="nav-link">Quiz</a></li>
+          <li class="nav-item"><a href="extra.html" class="nav-link active">Fun</a></li>
+        </ul>
+          <div class="dropdown portal-dropdown-btn mt-2 mt-lg-0">
+            <button class="portal-btn portal-btn-student dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:20px;padding:7px 18px;display:inline-flex;align-items:center;gap:6px;">
+              <i class="bi bi-person-circle"></i> Portals
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="student-login.html"><i class="bi bi-mortarboard me-2" style="color:var(--accent);"></i>Student Portal</a></li>
+              <li><a class="dropdown-item" href="teacher-login.html"><i class="bi bi-briefcase me-2" style="color:#7D3C98;"></i>Teacher Portal</a></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero" style="padding:56px 0 64px;">
+    <div class="container position-relative" style="z-index:1;">
+      <span class="hero-eyebrow">Interactive Activities</span>
+      <h1>Fun Science Activities</h1>
+      <p class="lead">Random science facts, word scrambles, riddles, and more — all built around your curriculum topics.</p>
+    </div>
+  </section>
+
+  <main class="container py-5">
+
+    <!-- Random Fact Machine -->
+    <div class="fact-machine">
+      <h2>Random Science Fact Generator</h2>
+      <div class="fact-display" id="fact-display">
+        Click the button below to reveal a fascinating science fact!
+      </div>
+      <button class="btn-primary-custom mx-auto" style="display:inline-flex;" onclick="showRandomFact()">
+        <i class="bi bi-shuffle"></i> New Fact
+      </button>
+    </div>
+
+    <!-- Fun Facts Grid -->
+    <div class="mb-5">
+      <span class="section-label">Did You Know?</span>
+      <h2 class="section-title">Amazing Science Facts</h2>
+      <p class="section-sub">Fascinating facts from your curriculum topics to make you go "Wow!"</p>
+
+      <div class="facts-grid">
+        <div class="fact-card">
+          <span class="fact-icon">&#127807;</span>
+          <h3>Living Things</h3>
+          <p>There are more than 8.7 million different species of living things on Earth — and scientists are still discovering new ones every year!</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">&#127803;</span>
+          <h3>Plants</h3>
+          <p>A single large tree can absorb up to 22 kilograms of carbon dioxide per year and produce enough oxygen for two people to breathe!</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">&#128025;</span>
+          <h3>Animals</h3>
+          <p>An elephant's trunk has over 40,000 individual muscles — more than an entire human body — making it incredibly strong and precise.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">&#10084;</span>
+          <h3>Human Body</h3>
+          <p>Your heart beats about 100,000 times every single day. Over a lifetime, that is more than 2.5 billion heartbeats!</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">&#127757;</span>
+          <h3>Environment</h3>
+          <p>The ocean covers more than 70% of Earth's surface and contains about 97% of all the water on our planet.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">&#9728;</span>
+          <h3>Solar System</h3>
+          <p>The Sun is so enormous that approximately one million Earths could fit inside it. Yet it is considered an average-sized star!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Word Scramble -->
+      <div class="col-lg-7">
+        <div class="game-box">
+          <h2>Word Scramble</h2>
+          <p>Unscramble the science word below. Use the hint if you need help!</p>
+
+          <span class="scrambled-word" id="scrambled-word">TNALP</span>
+          <p style="color:var(--text-muted);font-size:0.875rem;margin-bottom:4px;" id="scramble-hint">
+            It grows in soil and needs sunlight.
+          </p>
+
+          <div class="game-input">
+            <input
+              type="text"
+              id="scramble-input"
+              placeholder="Type your answer..."
+              onkeypress="scrambleKeyPress(event)"
+            />
+            <button class="btn-primary-custom" onclick="checkScramble()">
+              <i class="bi bi-check2"></i> Check
+            </button>
+          </div>
+
+          <div class="game-result" id="scramble-result"></div>
+
+          <div id="scramble-answer-box">
+            The answer was: <span class="answer-word" id="scramble-answer-word"></span>
+          </div>
+
+          <div class="d-flex gap-2 justify-content-center mt-3 flex-wrap">
+            <button class="btn-outline-primary-custom" onclick="nextScramble()">
+              <i class="bi bi-arrow-right"></i> Next Word
+            </button>
+            <button class="btn-outline-primary-custom" onclick="revealScrambleAnswer()">
+              <i class="bi bi-eye"></i> Show Answer
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Science Riddles -->
+      <div class="col-lg-5">
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--card-shadow);border:1px solid var(--gray-100);">
+          <span class="section-label">Brain Teasers</span>
+          <h3 style="font-size:1.2rem;color:var(--primary-dark);margin-bottom:16px;">Science Riddles</h3>
+
+          <div class="riddle-card mb-3">
+            <p class="riddle-q">I am green, I use sunlight, and I make my own food. What am I?</p>
+            <button class="btn-outline-primary-custom" style="font-size:0.82rem;padding:6px 16px;" onclick="toggleRiddle('r1',this)">Reveal Answer</button>
+            <div class="riddle-a" id="r1">A plant! Plants are the only living things that can make their own food through photosynthesis.</div>
+          </div>
+
+          <div class="riddle-card mb-3">
+            <p class="riddle-q">I pump 5 litres of blood around your body every minute. What am I?</p>
+            <button class="btn-outline-primary-custom" style="font-size:0.82rem;padding:6px 16px;" onclick="toggleRiddle('r2',this)">Reveal Answer</button>
+            <div class="riddle-a" id="r2">The heart! This powerful muscle keeps you alive by circulating blood non-stop, day and night.</div>
+          </div>
+
+          <div class="riddle-card mb-3">
+            <p class="riddle-q">I have no fixed shape and I fill any container completely. What state of matter am I?</p>
+            <button class="btn-outline-primary-custom" style="font-size:0.82rem;padding:6px 16px;" onclick="toggleRiddle('r3',this)">Reveal Answer</button>
+            <div class="riddle-a" id="r3">A gas! Gas particles spread out to fill whatever container they are in. Air in a balloon is a great example.</div>
+          </div>
+
+          <div class="riddle-card">
+            <p class="riddle-q">I fall from clouds as rain, flow to rivers, evaporate, and start the cycle over again. What am I?</p>
+            <button class="btn-outline-primary-custom" style="font-size:0.82rem;padding:6px 16px;" onclick="toggleRiddle('r4',this)">Reveal Answer</button>
+            <div class="riddle-a" id="r4">The water cycle! Water constantly moves between clouds, rain, rivers, and evaporation in a never-ending cycle.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="d-flex gap-3 flex-wrap justify-content-center mt-5 mb-2">
+      <a href="quiz.html" class="btn-primary-custom"><i class="bi bi-patch-question"></i> Take a Quiz</a>
+      <a href="course.html" class="btn-outline-primary-custom"><i class="bi bi-book-half"></i> Read Topics</a>
+      <a href="videos.html" class="btn-outline-primary-custom"><i class="bi bi-play-circle"></i> Watch Videos</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span class="footer-brand">ScienceB3</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="course.html">Topics</a>
+      <a href="videos.html">Videos</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="extra.html">Fun</a>
+    </div>
+    <p>Integrated Science for Basic 3 &nbsp;&middot;&nbsp; Ghana Curriculum</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    function revealScrambleAnswer() {
+      const box = document.getElementById('scramble-answer-box');
+      const wordEl = document.getElementById('scramble-answer-word');
+      // Access scrambleWords from script.js
+      if (typeof scrambleWords !== 'undefined') {
+        wordEl.textContent = scrambleWords[currentScramble].word;
+      }
+      box.style.display = 'block';
+    }
+
+    function toggleRiddle(id, btn) {
+      const el = document.getElementById(id);
+      el.classList.toggle('show');
+      btn.textContent = el.classList.contains('show') ? 'Hide Answer' : 'Reveal Answer';
+    }
+  </script>
+</body>
+</html>
